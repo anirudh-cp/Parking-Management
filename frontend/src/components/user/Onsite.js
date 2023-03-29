@@ -18,6 +18,8 @@ const Onsite = () => {
     };
 
     const handleScan = (data) => {
+        if (data !== null)
+            console.log(data)
         setData(data)
     }
 
@@ -49,7 +51,7 @@ const Onsite = () => {
 
 
             <Box sx={{ alignItems: "center", textAlign: "center" }}>
-                {data !== "" ?
+                {action !== "" ?
                     <QrReader
                         delay={100}
                         style={previewStyle}
