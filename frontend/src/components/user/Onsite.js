@@ -33,7 +33,6 @@ const Onsite = () => {
                 :
                 <Process data={data} action={action} resetData={resetData} />
             }
-            <Button onClick={() => {setData(102)}}>click</Button>
         </Fragment>
     )
 }
