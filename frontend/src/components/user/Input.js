@@ -5,10 +5,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import QrReader from 'react-qr-scanner'
+import QrReader from 'modern-react-qr-reader';
 
 
-const Input = ({ data, setData, action, setAction}) => {
+const Input = ({ data, setData, action, setAction }) => {
 
 
     const handleChange = (event) => {
@@ -17,12 +17,11 @@ const Input = ({ data, setData, action, setAction}) => {
     };
 
     const handleScan = (data) => {
-        if (data !== null){
-        
+        if (data !== null) {
             setData(data)
         }
-        console.log(data)
-        
+        // console.log(data)
+
     }
 
     const handleError = (err) => {
@@ -30,7 +29,7 @@ const Input = ({ data, setData, action, setAction}) => {
     }
 
     const previewStyle = {
-        width: "90vw",
+
     }
 
     return (
@@ -53,13 +52,13 @@ const Input = ({ data, setData, action, setAction}) => {
             </Box>
 
 
-            <Box sx={{ alignItems: "center", textAlign: "center" }}>
+            <Box sx={{ alignItems: "center", textAlign: "center", margin: "auto" }}>
                 {action !== "" ?
                     <QrReader
                         delay={100}
-                        style={previewStyle}
                         onError={handleError}
                         onScan={handleScan}
+                        constraints={{ facingMode: 'environment' }}
                     />
                     :
                     <Typography variant='h6' gutterBottom sx={{ m: 2 }}> Please provide permissions and select an action to Scan QR</Typography>

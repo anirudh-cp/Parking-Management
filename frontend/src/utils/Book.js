@@ -48,7 +48,7 @@ export default function useBook() {
 
         async checkout(code) {
             setLoadingBook(true);
-            const response = await apiObject.Checkin(token, code);
+            const response = await apiObject.Checkout(token, code);
             setLoadingBook(false);
 
             return response;

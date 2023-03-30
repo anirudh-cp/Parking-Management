@@ -19,16 +19,16 @@ const Process = ({ data, action, resetData }) => {
 
             let response = "";
             if (action === "checkin") {
-                response = await checkIn(data, plate, action);
+                response = await checkIn(data, plate, "onsite");
             }
             else if (action === "confirm") {
-                response = await confirm(data, plate, action);
+                response = await confirm(data, plate, "onsite");
             }
             else {
                 response = await checkout(data);
             }
 
-            if (response['code'] >= 200) {
+            if (response['code'] === 200 || response['code'] === 201) {
                 setMessage({
                     "checkin": "Check-in ", "confirm": "Prebooking Confirmation ",
                     "checkout": "Checkout "
