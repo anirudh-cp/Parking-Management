@@ -20,7 +20,7 @@ export default function useDriver() {
       const response = await apiObject.AddDriver(token, name, plate);
       setLoading(false);
 
-      if (response['code'] === 200)
+      if (response['code'] === 200 || response['code'] === 201)
       {
         setName(name);
         setPlate(plate);
