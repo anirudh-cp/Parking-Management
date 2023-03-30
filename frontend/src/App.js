@@ -5,6 +5,7 @@ import Header from "./components/common/Header"
 import Footer from './components/common/Footer';
 
 import RequireAuth from "./components/common/RequireAuth";
+import RequireData from "./components/common/RequireData";
 
 import Login from './pages/Login'
 import UserSignIn from './pages/UserSignIn'
@@ -25,8 +26,8 @@ function App() {
                     
                     {/* Routes that require authentication to proceed */}
 
-                    <Route exact path="/dash" element={<UserDash /> }></Route>
-                    <Route exact path="/control" element={<AdminDash /> }></Route>
+                    <Route exact path="/dash" element={<RequireData> <UserDash /> </RequireData>}></Route>
+                    <Route exact path="/control" element={<RequireAuth> <AdminDash /> </RequireAuth>}></Route>
                     
                     <Route path="*" element={<NoPage />}></Route>
                 </Routes>

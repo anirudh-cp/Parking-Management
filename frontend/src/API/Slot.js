@@ -2,10 +2,25 @@ import axios from 'axios';
 
 
 class API {
-  async getUserDetails(token) {
+
+  async getSlot(token) {
 
     try {
-      const response = await axios.get('/api/user',
+      const response = await axios.get('/api/slot');
+
+      return {"code": response.status, "data": response.data};
+
+    } catch (error) {
+      return {"code": error.response.status, "data": JSON.stringify(error.response.data)}
+    }
+
+  }
+
+
+  async getAllData(token) {
+
+    try {
+      const response = await axios.get('/api/slots',
       {
         headers: {
           "Authorization": "Token " + token
@@ -15,34 +30,16 @@ class API {
       return {"code": response.status, "data": response.data};
 
     } catch (error) {
-      return {"code": error.response.status, "data": error.response.data}
+      return {"code": error.response.status, "data": JSON.stringify(error.response.data)}
     }
 
   }
 
-  async getUserSimpleDetails(token) {
+
+  async CreateSlots(token, num) {
 
     try {
-      const response = await axios.get('/api/user/simple',
-      {
-        headers: {
-          "Authorization": "Token " + token
-        }
-      });
-
-      return {"code": response.status, "data": response.data};
-
-    } catch (error) {
-      return {"code": error.response.status, "data": error.response.data}
-    }
-
-  }
-
-  async putUser(uuid, token, body) {
-
-    try {
-      const response = await axios.put('/api/user/' + uuid,
-      body,
+      const response = await axios.post('/api/slots/' + num.toString(), {}, 
       {
         headers: {
           "Authorization": "Token " + token
@@ -52,15 +49,15 @@ class API {
       return {"code": response.status, "data": response.data};
 
     } catch (error) {
-      return {"code": error.response.status, "data": error.response.data}
+      return {"code": error.response.status, "data": JSON.stringify(error.response.data)}
     }
 
   }
 
-  async deleteUser(uuid, token) {
+  async DeleteSlot(token, code) {
 
     try {
-      const response = await axios.delete('/api/user/' + uuid,
+      const response = await axios.delete('/api/slots/' + code.toString(),
       {
         headers: {
           "Authorization": "Token " + token
@@ -70,7 +67,7 @@ class API {
       return {"code": response.status, "data": response.data};
 
     } catch (error) {
-      return {"code": error.response.status, "data": error.response.data}
+      return {"code": error.response.status, "data": JSON.stringify(error.response.data)}
     }
 
   }

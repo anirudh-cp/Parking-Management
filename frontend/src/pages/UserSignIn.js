@@ -11,7 +11,7 @@ import useHeaderVisiblityStore from '../storages/HeaderVisibility';
 import CustomTheme from '../assets/themes/CustomTheme'
 
 import { useNavigate } from "react-router-dom";
-import useAuth from '../utils/Auth';
+import useDriver from '../utils/Driver';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -25,7 +25,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 export default function SignIn() {
 
     const navigate = useNavigate();
-    const { login, loading } = useAuth();
+    const { driverAdd, loading } = useDriver();
 
     const [error, setError] = useState(false);
     const [message, setMessage] = useState("");
@@ -42,7 +42,7 @@ export default function SignIn() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        let response = await login(data.get('email'), data.get('password'))
+        let response = await driverAdd(data.get('name'), data.get('plate'))
 
         if (response["code"] === 200) {
             navigate("/dash");
@@ -100,7 +100,8 @@ export default function SignIn() {
                                 fullWidth
                                 id="name"
                                 label="Name"
-                                name="text"
+                                name="name"
+                                type="text"
                                 autoFocus />
 
                             <TextField

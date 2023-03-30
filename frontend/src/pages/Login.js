@@ -49,7 +49,7 @@ export default function SignIn() {
         let response = await login(data.get('email'), data.get('password'))
 
         if (response["code"] === 200){
-            navigate("/dash");
+            navigate("/control");
          }
         else {
              setError(true);

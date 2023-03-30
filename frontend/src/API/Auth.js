@@ -14,7 +14,7 @@ class API {
       return { "code": response.status, "data": response.data };
 
     } catch (error) {
-      return { "code": error.response.status, "data": error.response.data }
+      return { "code": error.response.status, "data": JSON.stringify(error.response.data) }
     }
 
   }
@@ -32,7 +32,7 @@ class API {
       return { "code": response.status, "data": response.data };
 
     } catch (error) {
-      return { "code": error.response.status, "data": error.response.data }
+      return { "code": error.response.status, "data": JSON.stringify(error.response.data) }
     }
 
 

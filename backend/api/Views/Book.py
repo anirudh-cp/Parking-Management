@@ -41,12 +41,14 @@ class BookActions(APIView):
         else:    
             return Response("Booking to confirm does not exist", status=status.HTTP_404_NOT_FOUND)
         
-        
-    def delete(self, request, *args, **kwargs):
+
+class BookDelete(APIView):
+
+    def delete(self, request, code, *args, **kwargs):
         
         data = request.data
-        if booking.objects.filter(code=data.get('code', None), driver=data.get('driver', None)).exists():
-            data = booking.objects.get(code=data.get('code', None), driver=data.get('driver', None)).delete()
+        if booking.objects.filter(code=code).exists():
+            data = booking.objects.get(code=code).delete()
         
         return Response("", status=status.HTTP_200_OK)
     

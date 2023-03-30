@@ -5,33 +5,27 @@ import { useState } from 'react'
 import Info from './Info'
 
 
-const Tile = ({ obj }) => {
+const Tile = ({ obj, setRefresh }) => {
 
-    const { code, driver } = obj;
+    const { code, plate } = obj;
     const [open, setOpen] = useState(false);
 
     const getColor = (data) => {
+        console.log(data)
         if (data !== null)
             return "success"
         else
             return "error"
     }
 
-    const getString = (data) => {
-        if (data !== null)
-            return "Filled"
-        else
-            return "Empty"
-    }
-
     return (
         <Fragment>
 
             <TransitionsModal open={open} setOpen={setOpen}
-                childElement={<Info obj={obj}/>} />
+                childElement={<Info obj={obj} setRefresh={setRefresh}/>} />
 
             <Card sx={{
-                borderLeft: 5, borderColor: getColor(driver) + '.main',
+                borderLeft: 5, borderColor: getColor(plate) + '.main',
                 display: 'inline-flex', width: '100%', justifyContent: 'space-between', my: 1
             }}
                 style={{ 'cursor': 'pointer' }}
