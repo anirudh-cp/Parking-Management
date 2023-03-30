@@ -4,7 +4,7 @@ from .models import *
 
 
 class user_admin(UserAdmin):
-    list_display = ('email',  'passWrongCount', 'date_joined', 'last_login',)
+    list_display = ('email',  'date_joined', 'last_login',)
     search_fields = ('email',)
     readonly_fields=('date_joined', 'last_login')
     ordering = ('email', )

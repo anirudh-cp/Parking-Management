@@ -1,17 +1,19 @@
 # API Specifications
 
 # User:
-Type | Path | Description |
-|--|--|--|
-POST | driver/add | Add new driver details. If present log in. |
-POST | book/?type="checkin\|checkout\|confirm" | Book, unbook or confirm prebooking |
-GET | slot | Get available slot for prebooking |
+Authentication | Type | Path | Description |
+|--|--|--|--|
+\- | POST | driver/add | Add new driver details. If present log in. |
+\- | POST | book/ | Check-in |
+\- | PUT | book/ | Confirm pre-booking |
+\- | DEL | book/ | Checkout |
+\- | GET | slot | Get available slot for pre-booking |
 
 
 # Admin:
-Type | Path | Description |
-|--|--|--|
-POST |  user/login | Log in for admin.
-POST | slots/num | Generate 'num' amounts of slots.
-DEL | slots/code | Delete slot with given code.
-GET | /slots | Get all data
+Authentication | Type | Path | Description |
+|--|--|--|--|
+TOKEN | POST |  user/login | Log in for admin.
+TOKEN | POST | slots/\<num\> | Generate given amounts of slots.
+TOKEN | DEL | slots/\<code\> | Delete slot with given code.
+TOKEN | GET | /slots | Get all data

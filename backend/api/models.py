@@ -54,7 +54,7 @@ class user(AbstractBaseUser):
     objects = user_manager()
 
     def __str__(self):
-        return self.uuid
+        return f'{self.uuid}'
     
     # For checking permissions. to keep it simple all STAFF have ALL permissons
     def has_perm(self, perm, obj=None):
@@ -83,10 +83,10 @@ class driver(models.Model):
 
 class slot(models.Model):
     
-    code = models.IntegerChoices(primary_key=True)   
+    code = models.IntegerField(primary_key=True)
     
     def __str__(self):
-        return self.code
+        return f'{self.code}'
     
 
 class booking(models.Model):

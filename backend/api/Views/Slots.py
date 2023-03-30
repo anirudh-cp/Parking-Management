@@ -6,9 +6,9 @@ from rest_framework import status, permissions
 
 from django.http import JsonResponse
 from django.core import serializers
-from django.db.models import Max
+from django.db.models import Max, F
 
-
+import json
 import sys
 
 
@@ -20,11 +20,12 @@ class SlotPreBook(APIView):
     def get(self, request, *args, **kwargs):
     
         booked_slots = booking.objects.filter().values_list('code', flat=True)
-        available_slots = slot.exclude(code__in=booked_slots)
-
+        available_slots = slot.objects.filter().exclude(code__in=booked_slots)
+        
         first_available_slot = available_slots.first()
         if first_available_slot:
-            return Response(first_available_slot, status=status.HTTP_200_OK)
+            record = slot_serializer(first_available_slot)
+            return Response(record.data, status=status.HTTP_200_OK)
         else:
             return Response("No slots free", status=status.HTTP_404_NOT_FOUND)
         
@@ -57,8 +58,12 @@ class SlotGet(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
     def get(self, request, *args, **kwargs):
-
-        slots = slot.objects.all().select_related('booking', 'booking__driver')
-        slots_data = serializers.serialize('json', slots)
-
-        return JsonResponse({'slots': slots_data})
+        
+        queryset = slot.objects.select_related('booking').annotate(
+                type=F('booking__type'),
+                plate=F('booking__driver__plate'),
+                name=F('booking__driver__name'),
+            ).values('code', 'type', 'plate', 'name',)
+        
+        data = list(queryset)
+        return JsonResponse({'slots' : data} , safe=False)

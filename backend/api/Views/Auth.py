@@ -18,7 +18,6 @@ sys.path.append('../..')
 
 
 @api_view(['POST', ])
-@permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def registration_view(request):
     if request.method == 'POST':
