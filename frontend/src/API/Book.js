@@ -32,7 +32,7 @@ class API {
   async Checkout(token, code) {
 
     try {
-      const response = await axios.delete('/api/book' +  code.toString());
+      const response = await axios.delete('/api/book/' +  code.toString());
 
       return {"code": response.status, "data": response.data};
 

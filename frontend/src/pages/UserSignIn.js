@@ -44,12 +44,12 @@ export default function SignIn() {
 
         let response = await driverAdd(data.get('name'), data.get('plate'))
 
-        if (response["code"] === 200) {
+        if (response["code"] === 200 || response['code'] === 201) {
             navigate("/dash");
         }
         else {
             setError(true);
-            setMessage(response["data"]);
+            setMessage(JSON.stringify(response["data"]));
         }
     };
 
